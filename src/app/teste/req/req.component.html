@@ -1,0 +1,9 @@
+<table class="table table-borderless">
+    <tbody *ngFor="let coluna of colunas">
+        <tr> 
+            <div class="form-check">
+            <label><input type="checkbox" value={{coluna}} (change)="onCheckboxChange($event)">{{coluna}} </label>
+            </div>
+        </tr>
+    </tbody>
+</table>
