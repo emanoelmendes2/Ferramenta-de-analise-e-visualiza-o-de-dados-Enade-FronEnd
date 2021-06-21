@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscriber } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
 
 
@@ -19,31 +20,40 @@ export class ReqComponent implements OnInit {
   'Questao_52','Questao_53','Questao_54','Questao_55','Questao_56','Questao_57','Questao_58','Questao_59','Questao_60','Questao_61',
   'Questao_62','Questao_63','Questao_64','Questao_65','Questao_66','Questao_67','Questao_68']
 
+  anos:any;
+  public isCollapsed = true;
 
-
-  constructor(private pegarapi: ApiService, private fb: FormBuilder) {
+  constructor(private api: ApiService, private fb: FormBuilder) {
     this.form = this.fb.group({
       checkArray: this.fb.array([], [Validators.required]),
+      anosForm:[null],
     })
-
    }
   public variavel = '';
   public erro = 'falha';
+  
 
   ngOnInit(): void {
-    this.consome();
+    // this.consome();
+
+    
+      this.api.getAnos().subscribe(
+        (params:any) => {
+          this.anos = params;
+      })
+    
 
   }
 
-  consome(){
-    this.pegarapi.pegar_cep().subscribe(
-      (retorno) => {this.lista_cep(retorno)},
-      () => console.log(this.erro)
-    )
+  // consome(){
+  //   this.pegarapi.pegar_cep().subscribe(
+  //     (retorno) => {this.lista_cep(retorno)},
+  //     () => console.log(this.erro)
+  //   )
 
-  }
+  // }
   lista_cep(a:any){
-    this.variavel = a['body']
+    //this.anos = a['localidade']
   }
 
   onCheckboxChange(e:any) {
@@ -61,10 +71,18 @@ export class ReqComponent implements OnInit {
         i++;
       });
     }
-
-    console.log(this.form.value.checkArray)
+    // console.log(this.form.value.checkArray)
   }
 
+
+  enviarDados(){
+   
+    this.api.processar({"colums":this.form.value.checkArray, "ano":this.form.value.anosForm}).subscribe((params:any)=>{
+      console.log(params)
+    });
+    // console.log(this.form.value.checkArray)
+    // console.log(this.form.value.anosForm)
+  }
 
 }
 

@@ -7,19 +7,23 @@ import { ReqComponent } from './teste/req/req.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './teste/admin/admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './compartilhado/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReqComponent,
-    AdminComponent
+    AdminComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
