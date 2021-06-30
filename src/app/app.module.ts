@@ -9,6 +9,7 @@ import { AdminComponent } from './teste/admin/admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './compartilhado/navbar/navbar.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -23,9 +24,12 @@ import { NavbarComponent } from './compartilhado/navbar/navbar.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

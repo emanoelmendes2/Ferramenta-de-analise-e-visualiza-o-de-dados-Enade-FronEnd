@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscriber } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
+import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { Label } from 'ng2-charts';
 
 
 @Component({
@@ -11,6 +14,32 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class ReqComponent implements OnInit {
   form: FormGroup;
+ 
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { xAxes: [{}], yAxes: [{}] },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public barChartLabels: Label[] = ['0','3','teste', '1', '2' ];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins:any = [pluginDataLabels];
+
+  public barChartData: ChartDataSets[] = [
+    { data: [65, 59], label: 'Series A' },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+
+    // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+  ];
+
+
+
   colunas:any = ['Codigo_instituicao','org_academica','area_curso','Codigo_curso','Modalidade_Ensino','municipio_curso','Idade','Sexo',
   'Ano_Final_EM','Inicio_Grad.','Turno_Grad.','Presenca_Enade','Questao_01','Questao_02','Questao_04',
   'Questao_05','Questao_07','Questao_08','Questao_09','Questao_11','Questao_12','Questao_13','Questao_15','Questao_16',
@@ -35,7 +64,7 @@ export class ReqComponent implements OnInit {
 
   ngOnInit(): void {
     // this.consome();
-
+    console.log(this.form.value.anosForm)
     
       this.api.getAnos().subscribe(
         (params:any) => {
@@ -76,13 +105,37 @@ export class ReqComponent implements OnInit {
 
 
   enviarDados(){
-   
     this.api.processar({"colums":this.form.value.checkArray, "ano":this.form.value.anosForm}).subscribe((params:any)=>{
-      console.log(params)
+      this.inicializargraph(params);
     });
-    // console.log(this.form.value.checkArray)
-    // console.log(this.form.value.anosForm)
   }
 
+  inicializargraph(data:any){
+    // itera graciosamente através de chave-valor (key-value)
+    // var obj = {a: 5, b: 7, c: 9};
+    var data_array = [];
+    for (var [key, value] of Object.entries(data)) {
+
+      console.log(value)
+      // data_array.push({data:})
+    }
+
+
+    console.log(data)
+    this.barChartLabels = data.labels;
+  }
+
+ // events
+ public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+  console.log(event, active);
 }
+
+public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+  console.log(event, active);
+}
+
+  
+}
+
+
 
