@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscriber } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
-import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import { ChartDataSets, ChartOptions, ChartType, RadialChartOptions } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 
@@ -14,7 +14,7 @@ import { Label } from 'ng2-charts';
 })
 export class ReqComponent implements OnInit {
   form: FormGroup;
- 
+
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -26,18 +26,15 @@ export class ReqComponent implements OnInit {
       }
     }
   };
-  public barChartLabels: Label[] = ['0','3','teste', '1', '2' ];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins:any = [pluginDataLabels];
-
-  public barChartData: ChartDataSets[] = [
-    { data: [65, 59], label: 'Series A' },
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-
-    // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
-  ];
-
+  public barChartData: ChartDataSets[] = [];
+  public radarChartType: ChartType = 'radar';
+  public radarChartOptions: RadialChartOptions = {
+    responsive: true,
+  };
 
 
   colunas:any = ['Codigo_instituicao','org_academica','area_curso','Codigo_curso','Modalidade_Ensino','municipio_curso','Idade','Sexo',
@@ -74,13 +71,6 @@ export class ReqComponent implements OnInit {
 
   }
 
-  // consome(){
-  //   this.pegarapi.pegar_cep().subscribe(
-  //     (retorno) => {this.lista_cep(retorno)},
-  //     () => console.log(this.erro)
-  //   )
-
-  // }
   lista_cep(a:any){
     //this.anos = a['localidade']
   }
@@ -103,26 +93,43 @@ export class ReqComponent implements OnInit {
     // console.log(this.form.value.checkArray)
   }
 
+  teste(){
+    return [{ data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }]
+  }
 
   enviarDados(){
-    this.api.processar({"colums":this.form.value.checkArray, "ano":this.form.value.anosForm}).subscribe((params:any)=>{
-      this.inicializargraph(params);
+    this.api.processar({"colums":this.form.value.checkArray, "ano":this.form.value.anosForm}).subscribe((response:any)=>{
+      // this.reponse_api = response; 
+      this.inicializargraph(response);
     });
   }
 
   inicializargraph(data:any){
-    // itera graciosamente através de chave-valor (key-value)
-    // var obj = {a: 5, b: 7, c: 9};
-    var data_array = [];
+    var dados = [];
     for (var [key, value] of Object.entries(data)) {
+      var response = this.process_values(key,value)
 
-      console.log(value)
-      // data_array.push({data:})
+      if(this.barChartLabels.length==0){
+        this.barChartLabels = response.labels
+      }
+      if(this.barChartLabels.length<response.labels.length){
+        this.barChartLabels = response.labels
+      }
+      // console.log(response.data)
+      dados.push({data:response.data, label:response.label})
     }
+    this.barChartData = dados;
 
+  }
 
-    console.log(data)
-    this.barChartLabels = data.labels;
+  process_values(k:any,v:any){
+    var label = []
+    var data:any = new Array;
+    for (var [key, value] of Object.entries(v)){
+      label.push(key)
+      data.push(value)
+    } 
+    return {data:data, label:k, labels:label}
   }
 
  // events

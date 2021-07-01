@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient,HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-
+  private header = new HttpHeaders({ 'Accept': 'application/json', 'Content-Type':'multipart/form-data'});
   constructor(private http: HttpClient) { }
 
   private readonly API_ROOT = `${environment.urlapi}`;
@@ -27,5 +27,15 @@ export class ApiService {
   }
   processar(dado:any){
     return this.http.post(`http://127.0.0.1:8000/api/processar`, dado );
+  }
+
+  adicionarDados(ano:any, arquivo:any){
+    let formData: FormData = new FormData();
+    formData.append('ano', ano);
+    if (arquivo) {
+      formData.append('arquivo', arquivo);
+    }
+    // return
+    return this.http.post(`http://127.0.0.1:8000/api/dados/adicionar`, formData);
   }
 }

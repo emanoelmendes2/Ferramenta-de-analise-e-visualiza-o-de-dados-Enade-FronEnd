@@ -10,13 +10,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './compartilhado/navbar/navbar.component';
 import { ChartsModule } from 'ng2-charts';
+import { PainelEnvioComponent } from './painel-envio/painel-envio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReqComponent,
     AdminComponent,
-    NavbarComponent
+    NavbarComponent,
+    PainelEnvioComponent
   ],
   imports: [
     BrowserModule,
