@@ -21,15 +21,15 @@ export class PainelEnvioComponent implements OnInit {
   }
 
   onChangefile(files: any) {
-    console.log(files)
-    const fileItem = files.item(0);
-    this.form.value.arquivo = fileItem;
+
+    const fileItem = files.files.item(0);
+    this.file = fileItem;
   }
 
   salvar(){
 
     console.log(this.form.value.arquivo)
-    this.api.adicionarDados(this.form.value.ano, this.form.value.arquivo).subscribe((response:any)=>{
+    this.api.adicionarDados(this.form.value.ano, this.file).subscribe((response:any)=>{
       console.log(response)
     })
     console.log(this.form.value)

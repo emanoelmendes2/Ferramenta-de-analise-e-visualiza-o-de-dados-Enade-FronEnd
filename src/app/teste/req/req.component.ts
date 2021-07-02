@@ -14,6 +14,16 @@ import { Label } from 'ng2-charts';
 })
 export class ReqComponent implements OnInit {
   form: FormGroup;
+  active = 1;
+  testeClasse = 'custom-tab'
+
+ 
+  kVizinhos = 0;
+  dobrasF = 0;
+  error = 0;
+
+
+
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -102,6 +112,11 @@ export class ReqComponent implements OnInit {
       // this.reponse_api = response; 
       this.inicializargraph(response);
     });
+    this.api.get_knn(this.form.value.anosForm).subscribe((response:any)=>{  
+      this.kVizinhos = response.kVizinhos;
+      this.dobrasF = response.dobrasF;
+      this.error  = response.erro;
+    })
   }
 
   inicializargraph(data:any){
@@ -119,7 +134,6 @@ export class ReqComponent implements OnInit {
       dados.push({data:response.data, label:response.label})
     }
     this.barChartData = dados;
-
   }
 
   process_values(k:any,v:any){

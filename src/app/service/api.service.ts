@@ -38,4 +38,11 @@ export class ApiService {
     // return
     return this.http.post(`http://127.0.0.1:8000/api/dados/adicionar`, formData);
   }
+
+  get_knn(ano:any){
+
+    return this.http.post(`http://127.0.0.1:8000/api/knn`, {"ano":ano});
+  }
+
+
 }
