@@ -3,7 +3,7 @@
 <div class="container-fluid pb-5">
 	<form [formGroup]="form">
 		<div class="row mt-4 mb-4 d-flex justify-content-center">
-			<div ngbDropdown class="d-inline-block" ngbTooltip="Escolha duas opções para as colunas do grafico.">
+			<div ngbDropdown class="d-inline-block" ngbTooltip="Escolha as opções desejadas para as colunas do grafico.">
 				<button class="btn btn-outline-primary mx-2" id="dropdownBasic1" ngbDropdownToggle>
 					<span class="mx-1">Escolha</span>
 				</button>
@@ -32,19 +32,7 @@
 						</div>
 					</div>
 				</div>
-				<!-- <div ngbDropdown class="d-inline-block" ngbTooltip="Escolha o ano dos dados.">
-					<button class="btn btn-outline-primary mr-2" id="dropdownBasic1" ngbDropdownToggle>Ano</button>
-					<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-						<div class="dropdown-button">
-							<div *ngFor="let a of anos">
-								<div>
-										<label ngbDropdownItem><input class="mr-3" type="radio" value={{a.ano}} formControlName="anosForm"> {{a.ano}} </label>
-								</div>
-							</div>
-						</div>
-					</div>
 
-				</div> -->
 				<button type="button" class="btn btn-success" (click)='enviarDados()'>
 					<span class="mx-2">Confirmar</span>
 				</button>
@@ -58,10 +46,10 @@
 				<div class="row flex-column align-content-center mt-4">
 					<h5 class="m-5 text-center text-muted"  *ngIf="barChartData.length==0">Selecione os Dados para exibir o Gráfico</h5>
 
-					<div class="col-12 d-flex justify-content-center">
+					<!-- <div class="col-12 d-flex justify-content-center">
 						<div class="card border-info shadow-sm" style="width: 18rem;" *ngIf="barChartData.length>0">
 							<div class="card-header border-info " style="background-color: #00000013;">
-							  Texte Emanoel é gay
+							  Resultados
 							</div>
 							<ul class="list-group list-group-flush">
 							  <li class="list-group-item border-info text-info">O número ótimo de k vizinhos: {{kVizinhos}}</li>
@@ -69,7 +57,7 @@
 							  <li class="list-group-item border-info text-info">Erro de classificação incorreta: {{error}}</li>
 							</ul>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-8 m-auto pt-4">
 						<div class="card shadow-sm" *ngIf="barChartData.length>0">
 							<div class="card-body" >
@@ -91,10 +79,10 @@
 				<div class="row flex-column align-content-center mt-4">
 					<h5 class="m-5 text-center text-muted"  *ngIf="barChartData.length==0">Selecione os Dados para exibir o Gráfico</h5>
 
-					<div class="col-12 d-flex justify-content-center">
+					<!-- <div class="col-12 d-flex justify-content-center">
 						<div class="card border-info shadow-sm" style="width: 18rem;" *ngIf="barChartData.length>0">
 							<div class="card-header border-info " style="background-color: #00000013;">
-							  Texte Emanoel é gay
+							  Resultados 
 							</div>
 							<ul class="list-group list-group-flush">
 							  <li class="list-group-item border-info text-info">O número ótimo de k vizinhos: {{kVizinhos}}</li>
@@ -102,7 +90,7 @@
 							  <li class="list-group-item border-info text-info">Erro de classificação incorreta: {{error}}</li>
 							</ul>
 						</div>
-					</div>
+					</div> -->
 					<div class="col-8 m-auto pt-4">
 						<div class="card shadow-sm" *ngIf="barChartData.length>0">
 							<div class="card-body" >

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscriber } from 'rxjs';
 import { ApiService } from 'src/app/service/api.service';
 import { ChartDataSets, ChartOptions, ChartType, RadialChartOptions } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
@@ -81,10 +80,6 @@ export class ReqComponent implements OnInit {
 
   }
 
-  lista_cep(a:any){
-    //this.anos = a['localidade']
-  }
-
   onCheckboxChange(e:any) {
     const checkArray: FormArray = this.form.get('checkArray') as FormArray;
 
@@ -103,20 +98,18 @@ export class ReqComponent implements OnInit {
     // console.log(this.form.value.checkArray)
   }
 
-  teste(){
-    return [{ data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }]
-  }
+
 
   enviarDados(){
     this.api.processar({"colums":this.form.value.checkArray, "ano":this.form.value.anosForm}).subscribe((response:any)=>{
       // this.reponse_api = response; 
       this.inicializargraph(response);
     });
-    this.api.get_knn(this.form.value.anosForm).subscribe((response:any)=>{  
-      this.kVizinhos = response.kVizinhos;
-      this.dobrasF = response.dobrasF;
-      this.error  = response.erro;
-    })
+    // this.api.get_knn(this.form.value.anosForm).subscribe((response:any)=>{  
+    //   this.kVizinhos = response.kVizinhos;
+    //   this.dobrasF = response.dobrasF;
+    //   this.error  = response.erro;
+    // })
   }
 
   inicializargraph(data:any){
