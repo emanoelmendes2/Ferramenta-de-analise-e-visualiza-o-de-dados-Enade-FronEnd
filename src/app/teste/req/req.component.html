@@ -3,9 +3,9 @@
 <div class="container-fluid pb-5">
 	<form [formGroup]="form">
 		<div class="row mt-4 mb-4 d-flex justify-content-center">
-			<div ngbDropdown class="d-inline-block" ngbTooltip="Escolha as opções desejadas para as colunas do grafico.">
+			<div ngbDropdown class="d-inline-block" >
 				<button class="btn btn-outline-primary mx-2" id="dropdownBasic1" ngbDropdownToggle>
-					<span class="mx-1">Escolha</span>
+					<span class="mx-1">Questões</span>
 				</button>
 				<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
 					<div class="dropdown-button">
@@ -16,7 +16,7 @@
 						</div>
 					</div>
 				</div>
-				<div ngbDropdown class="d-inline-block" ngbTooltip="Escolha o ano dos dados.">
+				<div ngbDropdown class="d-inline-block" >
 					<button class="btn btn-outline-primary mr-2" id="dropdownBasic1" ngbDropdownToggle>
 						<span class="mx-1">Ano</span>
 					</button>
@@ -108,4 +108,16 @@
 			</tab>
 		</tabset>
 	  </div>
+	
+	 <div class="col-12 d-flex justify-content-center" *ngIf="array_questionario">
+						<div class="card border-info shadow-sm" style="width: 18rem;" *ngIf="barChartData.length>0">
+							<div class="card-header border-info " style="background-color: #00000013;">
+							  Sumario
+							</div>
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item border-info text-info">0 - perguntas não respondidas</li>
+							  <li class="list-group-item border-info text-info" *ngFor="let v of array_questionario">{{questionario[v]}}</li>
+							</ul>
+						</div>
+	</div> 
 </div>
