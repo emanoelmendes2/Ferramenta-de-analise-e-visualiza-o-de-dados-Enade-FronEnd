@@ -50,6 +50,7 @@ export class ReqComponent implements OnInit {
                         'Questao_21':'Questão 21 - Alguém em sua família concluiu um curso superior? 1) A 2)B',
                         'Questao_22':'Questão 22 - Excetuando-se os livros indicados na bibliografia do seu curso, quantos livros você leu neste ano? 1)Nenhum 2)Um ou dois 3)De três a cinco 4)De seis a oito 5)Mais de oito',
                         'Questao_23':'Questão 23 - Quantas horas por semana, aproximadamente, você dedicou aos estudos, excetuando as horas de aula? 1)Nenhuma, apenas assisto às aulas 2)De uma a três 3)De quatro a sete 4)De oito a doze 5)Mais de doze',
+                        'Questao_27':'Questão 27 - As disciplinas cursadas contribuíram para sua formação integral, como cidadão e profissional. 1)Discordo 2) 3) 4) 5) 6)Concordo Totalmente',
                         'Questao_28':'Questão 28 - Os conteúdos abordados nas disciplinas do curso favoreceram sua atuação em estágios ou em atividades de iniciação profissional. 1)Discordo 2) 3) 4) 5) 6)Concordo Totalmente',
                         'Questao_29':'Questão 29 - As metodologias de ensino utilizadas no curso desafiaram você a aprofundar conhecimentos e desenvolver competências reflexivas e críticas. 1)Discordo 2) 3) 4) 5) 6)Concordo Totalmente',
                         'Questao_30':'Questão 30 - O curso propiciou experiências de aprendizagem inovadoras 1)Discordo 2) 3) 4) 5) 6)Concordo Totalmente',
